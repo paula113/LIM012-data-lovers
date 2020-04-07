@@ -21,9 +21,7 @@ const logoLeftClick = document.getElementById('logoLeftClick');
 const logoRightClick = document.getElementById('logoRightClick');
 const h1Click = document.getElementById('h1Click');
 
-
-
-// CREANDO ELEMENTOS 
+// CREANDO ELEMENTOS
 const h1Element = document.createElement('h1');
 const divElement = document.createElement('div');
 h1Element.classList.add('title');
@@ -295,4 +293,3 @@ document.getElementById('divFichaModal').appendChild(btnCloseModal);
 document.getElementById('divFichaModal').appendChild(modalTitle);
 document.getElementById('divFichaModal').appendChild(divAll1);
 document.getElementById('divFichaModal').appendChild(divAll2);
-
