@@ -1,14 +1,21 @@
 import {
   filterAtletasForYear,
+
   filterAtletasForTemporada,
+
   displayAllData,
+  reducingRepeatingVals,
+  createStringLiteral,
+
 } from './data.js';
+
 import data from './data/atletas/atletas.js';
 // import atletas from './data/atletas/atletas.js';
 
 
 // DEFINICION DE VARIABLES
 const arrDataAtletas = data.atletas;
+
 
 const containerMain = document.getElementById('containerMain');
 containerMain.classList.remove('hideData');
@@ -199,7 +206,10 @@ divElement.querySelector('#year').addEventListener('change', (event) => {
     return acc;
   }, []);
   // console.log(filteredData);
-  // console.log(myOrderedArray);
+  // console.log(reducingRepeatingVals(filteredData));
+  // console.log(myOrderedArray.sport);
+  // console.log(createStringLiteral(myOrderedArray, 'temporada'));
+
   for (let i = 0; i < myOrderedArray.length; i += 1) {
     const orden = i + 1;
     stringTemplate += `<tr id="value" class="olympiCelda">
@@ -225,53 +235,43 @@ const summerContent = document.createElement('div');
 summerContent.classList.add('depotesdiv');
 summerSecction.appendChild(summerContent);
 
+const temporadaWinter = filterAtletasForTemporada(arrDataAtletas, 'Winter');
+const myReduceTempSports = reducingRepeatingVals(temporadaWinter);
+
+const temporadaSummer = filterAtletasForTemporada(arrDataAtletas, 'Summer');
+const myReduceSummerTempSports = reducingRepeatingVals(temporadaSummer);
+// INVIERNO
 btnWinter.addEventListener('click', () => {
   containerMain.classList.add('hideData');
   winterSecction.classList.remove('hideData');
   summerSecction.classList.add('hideData');
-  // DEPORTES FILTRADO POR TEMPORADA INVIERNO
-  const temporada = filterAtletasForTemporada(arrDataAtletas, 'Winter');
-  const myReduceTempSports = temporada.reduce((acc, currentValue) => {
-    if (acc.indexOf(currentValue) === -1) {
-      acc.push(currentValue);
-    }
-    return acc;
-  }, []);
-  const orderedtemp = myReduceTempSports.sort();
+  // console.log(createStringLiteral(myReduceTempSports));
+  // const orderedtemp = myReduceTempSports.sort();
   let strTemplate = '';
-  for (let i = 0; i < orderedtemp.length; i += 1) {
+  for (let i = 0; i < myReduceTempSports.length; i += 1) {
     strTemplate += `<div id="listDiv"class="sportContainer">
-                         <p class="sportTitle">${orderedtemp[i]}</p>
+                         <p class="sportTitle">${myReduceTempSports[i]}</p>
                    </div>`;
   }
-  // console.log(orderedtemp);
-  // console.log(strTemplate);
   winterContent.innerHTML = strTemplate;
 });
 
-const btnSortW = document.getElementById('btnSort');
+const btnSortW = document.querySelector('#btnSortW');
 btnSortW.addEventListener('click', () => {
-  const sportDiv = winterContent.querySelectorAll('.sportTitle');
-  console.log(sportDiv);
+  // const sportDiv = winterContent.querySelectorAll('.sportTitle');
+  console.log(myReduceTempSports);
+  console.log(myReduceTempSports.sort());
+  btnSortW.innerHTML = 'Z-A';
   // console.log(winterContent.querySelectorAll('.sportTitle'));
 });
 
+
+// DEPORTES FILTRADO POR TEMPORADA VERANO
 btnSummer.addEventListener('click', () => {
   containerMain.classList.add('hideData');
   summerSecction.classList.remove('hideData');
   winterSecction.classList.add('hideData');
-  // DEPORTES FILTRADO POR TEMPORADA VERANO
-  const temporada = filterAtletasForTemporada(arrDataAtletas, 'Summer');
-  // console.log(temporada);
-
-  const myReduceTempSports = temporada.reduce((acc, currentValue) => {
-    if (acc.indexOf(currentValue) === -1) {
-      acc.push(currentValue);
-    }
-    return acc;
-  }, []);
-  // console.log(myReduceTempSports);
-  const orderedtemp = myReduceTempSports.sort();
+  const orderedtemp = myReduceSummerTempSports.sort();
   let strTemplate = '';
   for (let i = 0; i < orderedtemp.length; i += 1) {
     strTemplate += `<div class="sportContainer">

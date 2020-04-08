@@ -30,6 +30,32 @@ export const filterAtletasForTemporada = (arr, temp) => {
   return newArr;
 };
 
+export const reducingRepeatingVals = (arr) => {
+  const shortArr = arr.reduce((acc, currentValue) => {
+    if (acc.indexOf(currentValue) === -1) {
+      acc.push(currentValue);
+    }
+    return acc;
+  }, []);
+  return shortArr;
+};
+
+export const createStringLiteral = (arr, key) => {
+  let strTemplate = '';
+  for (let i = 0; i < arr.length; i += 1) {
+    strTemplate += `<div id="listDiv"class="sportContainer">
+                         <p class="sportTitle">${arr[i][key]}</p>
+                   </div>`;
+  }
+  return strTemplate;
+};
+
+export const compare = (a, b) => {
+
+
+  });
+ };
+
 
 export const displayAllData = (arry) => {
   const newArr = [];
