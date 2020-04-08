@@ -251,8 +251,8 @@ btnWinter.addEventListener('click', () => {
 
 const btnSortW = document.getElementById('btnSort');
 btnSortW.addEventListener('click', () => {
-  const sportDiv = winterContent.querySelectorAll('.sportTitle');
-  console.log(sportDiv);
+  // const sportDiv = winterContent.querySelectorAll('.sportTitle');
+  // console.log(sportDiv);
   // console.log(winterContent.querySelectorAll('.sportTitle'));
 });
 
