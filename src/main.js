@@ -5,8 +5,11 @@ import {
 
   displayAllData,
   reducingRepeatingVals,
-  createStringLiteral,
-
+  // createStringLiteral,
+  // accessingMedalla,
+  sortingArray,
+  groupBy,
+  atletasAndDisciplinas,
 } from './data.js';
 
 import data from './data/atletas/atletas.js';
@@ -15,7 +18,22 @@ import data from './data/atletas/atletas.js';
 
 // DEFINICION DE VARIABLES
 const arrDataAtletas = data.atletas;
+// console.log(arrDataAtletas);
+// const filter = pruevaFilterToNewObject(arrDataAtletas)
+// console.log(pruevaFilterToNewObject(arrDataAtletas));
+// console.log(filterAtletasForYear(arrDataAtletas));
+const filterAtletas2016 = filterAtletasForYear(arrDataAtletas, 2016);// NO BORRAR!!!!!!
+const reducedIt = reducingRepeatingVals(filterAtletas2016);
+const medallasArr = atletasAndDisciplinas(reducedIt, 'Silver');// => disciplinas
+console.log(reducedIt);
+console.log(medallasArr);
+// const namesA2016 = groupBy(medallasArr, 'año');
+// console.log(namesA2016);
+// console.log(groupBy(medallasArr, 'medalla'));
+// const nmes = groupBy(reducedIt, 'name');
+// console.log(nmes);
 
+// console.log(accessingMedalla(namesA2016, 'Silver'));
 
 const containerMain = document.getElementById('containerMain');
 containerMain.classList.remove('hideData');
@@ -60,12 +78,11 @@ divAll2.classList.add('colorFondo2');
 
 
 // BOTON DEL MENU "MIRA MAS ATLETAS"
+// const filterAtletas2016 = filterAtletasForYear(arrDataAtletas, 2016);
 btnByName.addEventListener('click', () => {
   containerMain.classList.add('hideData');
   byName.classList.remove('hideData');
   // dVerMas.classList.remove('hideData');
-
-  const filterAtletas2016 = filterAtletasForYear(arrDataAtletas, 2016);
   const myOrderedArray = filterAtletas2016.reduce((acc, currentValue) => {
     if (acc.indexOf(currentValue) === -1) {
       acc.push(currentValue);
@@ -255,12 +272,13 @@ btnWinter.addEventListener('click', () => {
   }
   winterContent.innerHTML = strTemplate;
 });
-
+const ar = ['Freestyle Skiing', 'Ice Hockey', 'Luge', 'Nordic Combined', 'Short Track Speed Skating', 'Alpine Skiing', 'Biathlon', 'Bobsleigh', 'Cross Country Skiing', 'Curling', 'Figure Skating', 'Skeleton', 'Ski Jumping', 'Snowboarding', 'Speed Skating'];
 const btnSortW = document.querySelector('#btnSortW');
 btnSortW.addEventListener('click', () => {
   // const sportDiv = winterContent.querySelectorAll('.sportTitle');
-  console.log(myReduceTempSports);
-  console.log(myReduceTempSports.sort());
+  console.log(ar);
+  console.log(sortingArray(myReduceTempSports, 'Z-A'));
+  console.log(sortingArray(myReduceTempSports, 'A-Z'));
   btnSortW.innerHTML = 'Z-A';
   // console.log(winterContent.querySelectorAll('.sportTitle'));
 });
