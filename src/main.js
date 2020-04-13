@@ -8,7 +8,7 @@ import {
   // createStringLiteral,
   // accessingMedalla,
   sortingArray,
-  groupBy,
+  // groupBy,
   atletasAndDisciplinas,
 } from './data.js';
 
@@ -22,17 +22,22 @@ const arrDataAtletas = data.atletas;
 // const filter = pruevaFilterToNewObject(arrDataAtletas)
 // console.log(pruevaFilterToNewObject(arrDataAtletas));
 // console.log(filterAtletasForYear(arrDataAtletas));
-const filterAtletas2016 = filterAtletasForYear(arrDataAtletas, 2016);// NO BORRAR!!!!!!
-const reducedIt = reducingRepeatingVals(filterAtletas2016);
-const medallasArr = atletasAndDisciplinas(reducedIt, 'Silver');// => disciplinas
-console.log(reducedIt);
-console.log(medallasArr);
-// const namesA2016 = groupBy(medallasArr, 'año');
+const filterAtleta2016 = filterAtletasForYear(arrDataAtletas, 2016);// NO BORRAR!!!!!!
+const reducedIt = reducingRepeatingVals(filterAtleta2016);
+const medallasSilverArr = atletasAndDisciplinas(reducedIt, 'Silver');// => disciplinas
+// const medallasBronzeArr = atletasAndDisciplinas(reducedIt, 'Bronze');
+// const medallasGoldArr = atletasAndDisciplinas(reducedIt, 'Gold');
+// console.log(reducedIt);
+console.log(medallasSilverArr);
+// console.log(medallasBronzeArr);
+// console.log(medallasGoldArr);
+// const namesA2016 = groupBy(reducedIt, 'año');
 // console.log(namesA2016);
-// console.log(groupBy(medallasArr, 'medalla'));
-// const nmes = groupBy(reducedIt, 'name');
-// console.log(nmes);
-
+// console.log(groupBy(reducedIt, 'medalla'));
+        // const nmes = groupBy(reducedIt, 'name');
+        // console.log(nmes);
+// const medalla = groupBy(reducedIt, 'medalla');
+// console.log(medalla);
 // console.log(accessingMedalla(namesA2016, 'Silver'));
 
 const containerMain = document.getElementById('containerMain');
@@ -83,6 +88,7 @@ btnByName.addEventListener('click', () => {
   containerMain.classList.add('hideData');
   byName.classList.remove('hideData');
   // dVerMas.classList.remove('hideData');
+  const filterAtletas2016 = filterAtletasForYear(arrDataAtletas, 2016);
   const myOrderedArray = filterAtletas2016.reduce((acc, currentValue) => {
     if (acc.indexOf(currentValue) === -1) {
       acc.push(currentValue);
@@ -214,19 +220,8 @@ divAll2.innerHTML = fichaTable;
 divElement.querySelector('#year').addEventListener('change', (event) => {
   const selectedYear = parseInt(event.target.value, 10);
   const filteredData = filterAtletasForYear(arrDataAtletas, selectedYear);
+  const myOrderedArray = reducingRepeatingVals(filteredData);
   let stringTemplate = '';
-
-  const myOrderedArray = filteredData.reduce((acc, currentValue) => {
-    if (acc.indexOf(currentValue) === -1) {
-      acc.push(currentValue);
-    }
-    return acc;
-  }, []);
-  // console.log(filteredData);
-  // console.log(reducingRepeatingVals(filteredData));
-  // console.log(myOrderedArray.sport);
-  // console.log(createStringLiteral(myOrderedArray, 'temporada'));
-
   for (let i = 0; i < myOrderedArray.length; i += 1) {
     const orden = i + 1;
     stringTemplate += `<tr id="value" class="olympiCelda">
@@ -240,65 +235,70 @@ divElement.querySelector('#year').addEventListener('change', (event) => {
 });
 
 // ----BUSQUEDA POR DEPORTE----//
+const bySports = document.getElementById('bySports');
 const btnWinter = document.getElementById('winter');
 const winterSecction = document.getElementById('TemporadaInvierno');
-const winterContent = document.createElement('div');
-winterContent.classList.add('depotesdiv');
-winterSecction.appendChild(winterContent);
-
+const contentSection = document.createElement('div');
+contentSection.classList.add('depotesdiv');
+const winterSports = filterAtletasForTemporada(arrDataAtletas, 'Winter');
+const reducedWinterSports = reducingRepeatingVals(winterSports);
 const btnSummer = document.getElementById('summer');
 const summerSecction = document.getElementById('TemporadaVerano');
 const summerContent = document.createElement('div');
 summerContent.classList.add('depotesdiv');
-summerSecction.appendChild(summerContent);
-
-const temporadaWinter = filterAtletasForTemporada(arrDataAtletas, 'Winter');
-const myReduceTempSports = reducingRepeatingVals(temporadaWinter);
-
 const temporadaSummer = filterAtletasForTemporada(arrDataAtletas, 'Summer');
 const myReduceSummerTempSports = reducingRepeatingVals(temporadaSummer);
-// INVIERNO
+const asc = 'A-Z';
+const desc = 'Z-A';
+
+const displayList = (array = [], section) => {
+  const sections = section;
+  sections.innerHTML = '';
+  // contentSection.innerHTML = '';
+  let strTemplate = '';
+  for (let i = 0; i < array.length; i += 1) {
+    strTemplate += `<div id="listDiv"class="sportContainer">
+                           <p class="sportTitle">${array[i]}</p>
+                     </div>`;
+  }
+  sections.innerHTML = strTemplate;
+};
+
+// DEPORTES TEMPORADA INVIERNO
 btnWinter.addEventListener('click', () => {
   containerMain.classList.add('hideData');
+  bySports.classList.remove('hideData');
   winterSecction.classList.remove('hideData');
   summerSecction.classList.add('hideData');
-  // console.log(createStringLiteral(myReduceTempSports));
-  // const orderedtemp = myReduceTempSports.sort();
-  let strTemplate = '';
-  for (let i = 0; i < myReduceTempSports.length; i += 1) {
-    strTemplate += `<div id="listDiv"class="sportContainer">
-                         <p class="sportTitle">${myReduceTempSports[i]}</p>
-                   </div>`;
-  }
-  winterContent.innerHTML = strTemplate;
+  const listAz = sortingArray(reducedWinterSports, asc);
+  displayList(listAz, contentSection);
 });
-const ar = ['Freestyle Skiing', 'Ice Hockey', 'Luge', 'Nordic Combined', 'Short Track Speed Skating', 'Alpine Skiing', 'Biathlon', 'Bobsleigh', 'Cross Country Skiing', 'Curling', 'Figure Skating', 'Skeleton', 'Ski Jumping', 'Snowboarding', 'Speed Skating'];
-const btnSortW = document.querySelector('#btnSortW');
-btnSortW.addEventListener('click', () => {
-  // const sportDiv = winterContent.querySelectorAll('.sportTitle');
-  console.log(ar);
-  console.log(sortingArray(myReduceTempSports, 'Z-A'));
-  console.log(sortingArray(myReduceTempSports, 'A-Z'));
-  btnSortW.innerHTML = 'Z-A';
-  // console.log(winterContent.querySelectorAll('.sportTitle'));
-});
-
-
-// DEPORTES FILTRADO POR TEMPORADA VERANO
+// DEPORTES TEMPORADA VERANO
 btnSummer.addEventListener('click', () => {
   containerMain.classList.add('hideData');
+  bySports.classList.remove('hideData');
   summerSecction.classList.remove('hideData');
   winterSecction.classList.add('hideData');
-  const orderedtemp = myReduceSummerTempSports.sort();
-  let strTemplate = '';
-  for (let i = 0; i < orderedtemp.length; i += 1) {
-    strTemplate += `<div class="sportContainer">
-                         <p class="sportTitle">${orderedtemp[i]}</p>
-                   </div>`;
-  }
-  // console.log(orderedtemp);
-  summerContent.innerHTML = strTemplate;
+  const listAz = sortingArray(myReduceSummerTempSports, asc);
+  displayList(listAz, summerContent);
 });
+// BUTTONS
+const btnSortW = document.getElementById('btnSortW');
+const btnSortS = document.getElementById('btnSortS');
+
+btnSortW.addEventListener('click', () => {
+  const listAz = sortingArray(reducedWinterSports, desc);
+  displayList(listAz, contentSection);
+  btnSortW.textContent = 'A-Z';
+});
+
+btnSortS.addEventListener('click', () => {
+  const listAz = sortingArray(myReduceSummerTempSports, desc);
+  displayList(listAz, summerContent);
+});
+
+winterSecction.appendChild(contentSection);
+summerSecction.appendChild(summerContent);
 
 
 // VENTANA ATLETAS OLIMPICOS

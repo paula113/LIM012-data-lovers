@@ -15,13 +15,13 @@
       <nav class="navegador">
         <ul>
           <li><a href="#byName" class="anchor"  id="btnByName" >MIRA MAS DE ATLETAS</a></li>
-          <li id="btnDeportes" class="anchor">CONOCE MAS DE DEPORTES</li>
-          <div class="DropMenuD">
-            <ul>
-              <li><a href="#TemporadaInvierno" id="winter" class="dropdown-content">INVIERNO</a></li>
-              <li><a href="#TemporadaVerano" id="summer" class="dropdown-content">VERANO</a></li>
-            </ul>
-          </div>
+          <li id="btnDeportes">
+             <ul>
+                <li><a href="#TemporadaInvierno" id="winter" class="dropdown-content ">INVIERNO</a></li>
+                <li><a href="#TemporadaVerano" id="summer" class="dropdown-content ">VERANO</a></li>
+              </ul>
+            <a href="#"  class="anchor dropMenu">MAS DE DEPORTES</a>
+          </li>
         </ul>
       </nav>
       </div>
@@ -84,14 +84,14 @@
       <button id="btnVerMas"><strong>VER MAS ATLETAS</strong></button>
     </div> -->
     <div id="root"></div>
-    <div>
+    <div id="bySports" class="hideData">
       <section id="TemporadaInvierno" class="hideData">
-        <h1 class="title">DEPORTES DE INVIERNO</h1>
-        <button id="btnSortW" class="button">A-Z</button>
+        <h1 class="title">DEPORTES INVIERNO</h1>
+        <button id="btnSortW" class="button">Z-A</button>
       </section>
       <section id="TemporadaVerano" class="hideData">
-        <h1 class="title">DEPORTES DE VERANO</h1>
-        <button id="btnSort" class="button">A-Z</button>
+        <h1 class="title">DEPORTES VERANO</h1>
+        <button id="btnSortS" class="button">Z-A</button>
       </section>
     </div>
   <script src="main.js" type="module"></script>
