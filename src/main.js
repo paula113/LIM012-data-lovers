@@ -80,7 +80,7 @@ divAll1.classList.add('colorFondo1');
 // Div2 datos disciplinas
 const divAll2 = document.createElement('div');
 divAll2.classList.add('colorFondo2');
-
+document.getElementById('divFichaModal').appendChild(divAll2);
 
 // BOTON DEL MENU "MIRA MAS ATLETAS"
 // const filterAtletas2016 = filterAtletasForYear(arrDataAtletas, 2016);
