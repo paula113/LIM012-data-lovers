@@ -60,12 +60,14 @@ header h1{
     display: flex;
     flex-wrap: wrap;
     width: 100%;
+    margin: 1%;
 }
 
 .navegador li{
     list-style-type: none;
     /* line-height: 60px; */
     width: 50%;
+    height: 50%;
 }
 .anchor{
     display: inline-flex;
@@ -79,43 +81,44 @@ header h1{
     color: #E9FFF9;
     text-transform: uppercase;
     text-decoration: none;
+    position: relative;
     /* text-align: center; */
 }
 
-.anchor:hover {
+/* .navegador .anchor:hover {
     background:#FFFFFF;
     color: #D64045;
-} 
-.DropMenuD{
-    overflow: hidden;
-    cursor: pointer;
-    margin-left: 60%;
-    text-align: center;
-    /* border: solid 2px orangered; */
-    width: 20%;
-    height: 50%;
-    /* width: 3rem; */
-    /* display: none; */
-} 
-.DropMenuD ul{
-    display: flex;
-    flex-direction: column;
+}  */
+
+.navegador ul li ul {
+    background-color: #D64045;
+    padding: 1%;
+    position: absolute;
+    width: 30%;
+    border-radius: 0px 0px 8px 8px;
+}
+.navegador ul li ul {
+    display: none;
+}
+.navegador ul li:hover ul {
+    display: block;
 }
 
+.navegador ul li ul li {
+    padding: 1%;
+    width: 100%;
+}
 .dropdown-content{
-    color:  #1D3354;
+    color:  #E9FFF9;
     text-decoration: none;
     font-family: Oswald;
     font-style: normal;
     font-weight: normal;
+    display: block;
+    text-align: center;
     /* display: none; */
-} 
+}
 
-/* .DropMenuD:hover .DropMenuD {
-    border: solid 2px  orange;
-    display: flex;
-    flex-direction: column;
-} */
 .title{   
     display: flex;
     width: 80%;

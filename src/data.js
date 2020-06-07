@@ -5,6 +5,7 @@ export const filterAtletasForYear = (arr, num) => {
   for (let i = 0; i < arr.length; i += 1) {
     if (Object.prototype.hasOwnProperty.call(arr[i], 'disciplinas')) {
       const arrayDisciplinas = arr[i].disciplinas;
+      // console.log(Object.prototype.hasOwnProperty.call(arr[i], 'disciplinas'));
       for (let j = 0; j < arrayDisciplinas.length; j += 1) {
         if (arrayDisciplinas[j]['año'] === num) {
           newArr.push(arr[i]);
@@ -28,6 +29,84 @@ export const filterAtletasForTemporada = (arr, temp) => {
     }
   });
   return newArr;
+};
+
+export const reducingRepeatingVals = (arr) => {
+  const shortArr = arr.reduce((acc, currentValue) => {
+    if (acc.indexOf(currentValue) === -1) {
+      acc.push(currentValue);
+    }
+    return acc;
+  }, []);
+  return shortArr;
+};
+
+export const groupBy = (objectArray, property) => {
+  const group = objectArray.reduce((acc, obj) => {
+    const key = obj[property];
+    if (!acc[key]) {
+      acc[key] = [];
+    }
+    acc[key].push(obj);
+    return acc;
+  }, {});
+  return group;
+};
+
+export const sum = objArr => objArr.reduce((acc, currentValue) => acc + currentValue.medalla, 0);
+
+// export const accessingToMedalla = object => object.filter(x => x.medalla === 'Silver');
+
+export const atletasAndDisciplinas = (arr, str) => {
+  const newArr = [];
+  for (let i = 0; i < arr.length; i += 1) {
+    if (Object.prototype.hasOwnProperty.call(arr[i], 'disciplinas')) {
+      const arrayDisciplinas = arr[i].disciplinas;
+      // console.log(Object.prototype.hasOwnProperty.call(arr[i], 'disciplinas'));
+      for (let j = 0; j < arrayDisciplinas.length; j += 1) {
+        if (arrayDisciplinas[j]['año'] === 2016) {
+          const arrDisciplinas16 = arrayDisciplinas[j];
+          console.log(arrDisciplinas16);
+          // const counter = data.reduce(function(obj, v) {
+          //   obj[v.status] = (obj[v.status] || 0) + 1;
+          //   return obj;
+          // }, {});
+
+          // console.log(Object.keys(arr[i]));
+          // console.log(arr[i]);
+          // newArr.push(arr[i]);
+        }
+      }
+    }
+  }
+  // arr.forEach((element) => {
+  //   if (Object.prototype.hasOwnProperty.call(element, 'disciplinas')) {
+  //     element.disciplinas.forEach((x) => {
+  //       newArr.push(x);
+  //     });
+  //   }
+  // });
+  return newArr;
+};
+
+// export const createStringLiteral = (arr, key) => {
+//   let strTemplate = '';
+//   for (let i = 0; i < arr.length; i += 1) {
+//     strTemplate += `<div id="listDiv"class="sportContainer">
+//                          <p class="sportTitle">${arr[i][key]}</p>
+//                    </div>`;
+//   }
+//   return strTemplate;
+// };
+
+export const sortingArray = (arr, order) => {
+  const sorteredArr = arr.sort((a, b) => {
+    if (a < b) return -1;
+    if (b > a) return 1;
+    return 0;
+  });
+  if (order === 'A-Z') return sorteredArr;
+  return sorteredArr.reverse();
 };
 
 
